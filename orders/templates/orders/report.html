@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><title>Отчёт за {{ date }}</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 700px; margin: 30px auto; padding: 0 16px; }
+  .order { border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin: 12px 0; }
+  .order h3 { margin: 0 0 8px; }
+  .order ul { margin: 0; padding-left: 20px; }
+  a.back { display: inline-block; margin-bottom: 16px; color: #2ec4b6; }
+</style>
+</head>
+<body>
+  <a class="back" href="{% url 'main' %}">← Назад</a>
+  <h1>Закрытые заказы за {{ date }}</h1>
+  {% if orders %}
+    <p>Всего закрыто: <b>{{ orders|length }}</b></p>
+    {% for o in orders %}
+      <div class="order">
+        <h3>Стол {{ o.table.number }} — {{ o.created_at|date:"H:i" }}</h3>
+        <ul>
+          {% for i in o.items.all %}
+            <li>{{ i.dish.name }} × {{ i.quantity }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Сегодня заказов ещё не было.</p>
+  {% endif %}
+</body>
+</html>
