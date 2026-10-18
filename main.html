@@ -43,7 +43,7 @@
       background: #eee; padding: 12px; margin: 0;
       font-weight: bold; font-size: 14px; text-transform: uppercase;
       cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-      user-select: none; color: #000; /* Жестко черный цвет */
+      user-select: none; color: #000;
     }
     .cat-header:hover { background: #e0e0e0; }
     .cat-header .arrow { font-size: 12px; transition: transform 0.2s; }
@@ -53,12 +53,16 @@
     .cat-body.open { display: block; }
 
     .dish-row { display: flex; gap: 4px; align-items: stretch; margin-bottom: 6px; }
+
+    /* ИСПРАВЛЕНИЕ ДЛЯ SAFARI НА IPHONE */
     .dish-btn {
       flex: 1; text-align: left; padding: 10px 12px;
       border: 1px solid #ccc; background: #fff;
       border-radius: 8px; font-size: 15px; cursor: pointer;
-      color: #000; /* Жестко черный цвет текста для блюд */
-      font-weight: 500;
+      color: #000 !important; /* Жестко черный текст */
+      -webkit-appearance: none; /* Убираем стили iOS */
+      appearance: none;
+      font-family: inherit;
     }
     .dish-btn:hover { background: #e8f4ff; }
     .dish-btn:disabled { opacity: .5; cursor: not-allowed; }
@@ -67,6 +71,7 @@
       width: 40px; flex-shrink: 0;
       border: 1px solid #ccc; border-radius: 8px; background: #fff;
       color: #555; font-weight: bold; font-size: 16px; cursor: pointer;
+      -webkit-appearance: none;
     }
     .info-btn:hover { background: #e8f4ff; }
 
@@ -82,7 +87,7 @@
     .item.added  { background: #fff3c4; border-color: #f0c040; }
     .item .name  { flex: 1; color: #000; }
     .item .qty   { font-weight: bold; min-width: 40px; text-align: center; color: #000; }
-    .btn { border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 14px; }
+    .btn { border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 14px; -webkit-appearance: none;}
     .btn-serve { background: #2ec4b6; color: #fff; }
     .btn-serve.active { background: #1a8f84; }
     .btn-minus, .btn-plus { background: #eee; color: #000; }
@@ -112,6 +117,7 @@
       resize: vertical;
       margin-bottom: 10px;
       color: #000;
+      -webkit-appearance: none;
     }
     .btn-save-comment {
       background: #2ec4b6; color: #fff; border: none;
@@ -124,6 +130,7 @@
       background: #e63946; color: #fff; border: none;
       border-radius: 8px; font-size: 16px; cursor: pointer;
       display: block;
+      -webkit-appearance: none;
     }
     .empty { color: #888; padding: 20px 0; }
 
@@ -170,7 +177,7 @@
       .dish-btn {
         padding: 14px;
         font-size: 16px;
-        min-height: 50px; /* Чтобы кнопка не сжималась */
+        min-height: 52px; /* Защита от схлопывания */
       }
 
       .close-order {
