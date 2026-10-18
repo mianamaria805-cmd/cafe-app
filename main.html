@@ -147,27 +147,36 @@
     @media (max-width: 768px) {
       body {
         flex-direction: column;
-        height: auto;
+        height: auto; /* Разрешаем странице прокручиваться */
         overflow-y: auto;
       }
+
       .menu {
         width: 100%;
-        height: 45vh;
+        height: auto; /* Убираем жесткую высоту, чтобы блюда не пропадали */
+        max-height: 50vh; /* Ограничиваем высоту, чтобы заказ был виден ниже */
         border-right: none;
         border-bottom: 2px solid #ccc;
       }
+
       .order {
         padding: 12px;
+        width: 100%;
       }
+
       .dish-btn {
         padding: 14px; /* Удобнее нажимать пальцем */
+        font-size: 16px;
       }
+
+      /* Делаем кнопку закрытия на всю ширину */
       .close-order {
         width: 100%;
         text-align: center;
         padding: 15px;
         font-size: 18px;
       }
+
       .comment-block {
         max-width: 100%;
       }
