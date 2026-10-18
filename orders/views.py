@@ -44,7 +44,6 @@ def main(request, table_id=None):
 
 
 @login_required
-@require_POST
 def add_dish(request, order_pk, dish_pk):
     order = get_object_or_404(Order, pk=order_pk, is_closed=False)
     dish = get_object_or_404(Dish, pk=dish_pk)
