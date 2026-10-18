@@ -7,8 +7,6 @@ from django.http import JsonResponse
 from django.utils import timezone
 from .models import Order, OrderItem, Dish, Table, Category
 
-
-@login_required
 def main(request, table_id=None):
     tables = Table.objects.all()
     open_orders = {o.table_id: o for o in Order.objects.filter(is_closed=False)}

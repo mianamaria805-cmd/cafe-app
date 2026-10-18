@@ -140,6 +140,38 @@
       background: #2ec4b6; color: #fff; border: none;
       border-radius: 8px; padding: 8px 16px; cursor: pointer;
     }
+
+    /* ========================================= */
+    /* МОБИЛЬНАЯ ВЕРСИЯ (ДЛЯ ТЕЛЕФОНОВ)          */
+    /* ========================================= */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        height: auto;
+        overflow-y: auto;
+      }
+      .menu {
+        width: 100%;
+        height: 45vh;
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+      }
+      .order {
+        padding: 12px;
+      }
+      .dish-btn {
+        padding: 14px; /* Удобнее нажимать пальцем */
+      }
+      .close-order {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        font-size: 18px;
+      }
+      .comment-block {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -165,12 +197,10 @@
   {% for cat in categories %}
     {% if cat.dishes.all %}
       <div class="category">
-        <!-- Заголовок категории (нажимается) -->
         <div class="cat-header {% if q %}active{% endif %}" onclick="toggleCat(this)">
           {{ cat.name }} <span class="arrow">▼</span>
         </div>
 
-        <!-- Тело категории со списком блюд. Если есть поиск (q), оно сразу открыто -->
         <div class="cat-body {% if q %}open{% endif %}">
           {% for dish in cat.dishes.all %}
             <div class="dish-row">
@@ -227,9 +257,8 @@
 
           <div class="comment-block">
             <label for="orderComment">Комментарий к заказу:</label>
-            <textarea id="orderComment" name="comment" rows="3" placeholder="Например: кофе с корицей, всё без лука...">{{ current_order.comment|default:'' }}</textarea>
+            <textarea id="orderComment" name="comment" rows="2" placeholder="Например: кофе с корицей...">{{ current_order.comment|default:'' }}</textarea>
 
-            <!-- Необязательная кнопка, если хотят сохранить комментарий, не закрывая заказ -->
             <button type="submit" formaction="{% url 'update_comment' current_order.pk %}" class="btn-save-comment">Сохранить комментарий</button>
           </div>
 
@@ -237,7 +266,7 @@
         </form>
 
       {% else %}
-        <p class="empty">Заказ пуст — выбери блюдо из меню слева.</p>
+        <p class="empty">Заказ пуст — выбери блюдо из меню.</p>
       {% endif %}
     {% endwith %}
   {% else %}
@@ -255,21 +284,19 @@
 </div>
 
 <script>
-  // Функция для раскрытия/скрытия категории
   function toggleCat(headerElement) {
     headerElement.classList.toggle('active');
     const body = headerElement.nextElementSibling;
     body.classList.toggle('open');
   }
 
-  // Модалка состава
   const modal = document.getElementById('dish-modal');
   const titleEl = document.getElementById('dish-modal-title');
   const compEl = document.getElementById('dish-modal-composition');
 
   document.querySelectorAll('.info-btn').forEach(btn => {
     btn.addEventListener('click', async (e) => {
-      e.preventDefault(); // Чтобы не нажималась форма добавления блюда под ней
+      e.preventDefault();
       const url = btn.dataset.url;
       const resp = await fetch(url);
       const data = await resp.json();
