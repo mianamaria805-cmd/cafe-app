@@ -56,13 +56,21 @@
 
     /* ИСПРАВЛЕНИЕ ДЛЯ SAFARI НА IPHONE */
     .dish-btn {
-      flex: 1; text-align: left; padding: 10px 12px;
-      border: 1px solid #ccc; background: #fff;
-      border-radius: 8px; font-size: 15px; cursor: pointer;
-      color: #000 !important; /* Жестко черный текст */
-      -webkit-appearance: none; /* Убираем стили iOS */
-      appearance: none;
+      flex: 1;
+      text-align: left;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      color: #000 !important; /* Текст черный */
       font-family: inherit;
+      -webkit-appearance: none;
+      appearance: none;
+      /* Эти две строки заставляют Safari показать текст */
+      display: flex;
+      align-items: center;
     }
     .dish-btn:hover { background: #e8f4ff; }
     .dish-btn:disabled { opacity: .5; cursor: not-allowed; }
@@ -72,6 +80,7 @@
       border: 1px solid #ccc; border-radius: 8px; background: #fff;
       color: #555; font-weight: bold; font-size: 16px; cursor: pointer;
       -webkit-appearance: none;
+      display: flex; align-items: center; justify-content: center;
     }
     .info-btn:hover { background: #e8f4ff; }
 
@@ -90,7 +99,7 @@
     .btn { border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 14px; -webkit-appearance: none;}
     .btn-serve { background: #2ec4b6; color: #fff; }
     .btn-serve.active { background: #1a8f84; }
-    .btn-minus, .btn-plus { background: #eee; color: #000; }
+    .btn-minus, .btn-plus { background: #eee; color: #000; display: flex; align-items: center; justify-content: center;}
 
     /* ---------- КОММЕНТАРИЙ И КНОПКА ---------- */
     .comment-block {
@@ -122,6 +131,7 @@
     .btn-save-comment {
       background: #2ec4b6; color: #fff; border: none;
       border-radius: 6px; padding: 8px 16px; cursor: pointer; font-size: 14px;
+      -webkit-appearance: none;
     }
     .btn-save-comment:hover { background: #1a8f84; }
 
@@ -177,7 +187,7 @@
       .dish-btn {
         padding: 14px;
         font-size: 16px;
-        min-height: 52px; /* Защита от схлопывания */
+        min-height: 52px;
       }
 
       .close-order {
@@ -224,7 +234,7 @@
           {% for dish in cat.dishes.all %}
             <div class="dish-row">
               {% if current_order %}
-                <form method="post" action="{% url 'add_dish' current_order.pk dish.pk %}" style="flex:1; display:flex;">
+                <form method="post" action="{% url 'add_dish' current_order.pk dish.pk %}" style="flex:1; display:flex; margin: 0;">
                   {% csrf_token %}
                   <button class="dish-btn" type="submit">{{ dish.name }}</button>
                 </form>
