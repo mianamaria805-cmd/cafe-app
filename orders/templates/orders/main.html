@@ -37,15 +37,13 @@
       border: 1px solid #ccc; border-radius: 8px;
     }
 
-    /* Аккордеон категорий */
     .category { margin-bottom: 8px; border: 1px solid #ddd; border-radius: 8px; background: #fff; overflow: hidden; }
     .cat-header {
       background: #eee; padding: 12px; margin: 0;
       font-weight: bold; font-size: 14px; text-transform: uppercase;
       cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-      user-select: none;
+      user-select: none; color: #000;
     }
-    .cat-header:hover { background: #e0e0e0; }
     .cat-header .arrow { font-size: 12px; transition: transform 0.2s; }
     .cat-header.active .arrow { transform: rotate(180deg); }
 
@@ -53,20 +51,29 @@
     .cat-body.open { display: block; }
 
     .dish-row { display: flex; gap: 4px; align-items: stretch; margin-bottom: 6px; }
+
+    /* ВМЕСТО КНОПКИ ТЕПЕРЬ ССЫЛКА (A) */
     .dish-btn {
-      flex: 1; text-align: left; padding: 10px 12px;
-      border: 1px solid #ccc; background: #fff;
-      border-radius: 8px; font-size: 15px; cursor: pointer;
+      flex: 1;
+      text-align: left;
+      padding: 14px 12px;
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #000;
+      text-decoration: none;
+      display: block;
+      font-weight: 500;
     }
     .dish-btn:hover { background: #e8f4ff; }
-    .dish-btn:disabled { opacity: .5; cursor: not-allowed; }
 
     .info-btn {
       width: 40px; flex-shrink: 0;
       border: 1px solid #ccc; border-radius: 8px; background: #fff;
       color: #555; font-weight: bold; font-size: 16px; cursor: pointer;
     }
-    .info-btn:hover { background: #e8f4ff; }
 
     /* ---------- ЗАКАЗ ---------- */
     .order { flex: 1; padding: 16px; overflow-y: auto; }
@@ -78,53 +85,34 @@
     }
     .item.served { background: #d4f5d4; border-color: #8ed08e; }
     .item.added  { background: #fff3c4; border-color: #f0c040; }
-    .item .name  { flex: 1; }
-    .item .qty   { font-weight: bold; min-width: 40px; text-align: center; }
+    .item .name  { flex: 1; color: #000; }
+    .item .qty   { font-weight: bold; min-width: 40px; text-align: center; color: #000; }
     .btn { border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 14px; }
     .btn-serve { background: #2ec4b6; color: #fff; }
     .btn-serve.active { background: #1a8f84; }
-    .btn-minus, .btn-plus { background: #eee; }
+    .btn-minus, .btn-plus { background: #eee; color: #000; }
 
     /* ---------- КОММЕНТАРИЙ И КНОПКА ---------- */
     .comment-block {
-      margin-top: 24px;
-      padding: 16px;
-      background: #f9f9f9;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      max-width: 600px;
+      margin-top: 24px; padding: 16px; background: #f9f9f9;
+      border: 1px solid #ddd; border-radius: 8px; max-width: 600px;
     }
-    .comment-block label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 8px;
-      color: #333;
-    }
+    .comment-block label { font-weight: bold; display: block; margin-bottom: 8px; color: #333; }
     .comment-block textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 15px;
-      resize: vertical;
-      margin-bottom: 10px;
+      width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;
+      font-family: inherit; font-size: 15px; resize: vertical; margin-bottom: 10px; color: #000;
     }
     .btn-save-comment {
       background: #2ec4b6; color: #fff; border: none;
       border-radius: 6px; padding: 8px 16px; cursor: pointer; font-size: 14px;
     }
-    .btn-save-comment:hover { background: #1a8f84; }
-
     .close-order {
-      margin-top: 20px; padding: 12px 20px;
-      background: #e63946; color: #fff; border: none;
-      border-radius: 8px; font-size: 16px; cursor: pointer;
-      display: block;
+      margin-top: 20px; padding: 12px 20px; background: #e63946; color: #fff; border: none;
+      border-radius: 8px; font-size: 16px; cursor: pointer; display: block;
     }
     .empty { color: #888; padding: 20px 0; }
 
-    /* ---------- МОДАЛКА СОСТАВА ---------- */
+    /* ---------- МОДАЛКА ---------- */
     .modal-back {
       position: fixed; inset: 0; background: rgba(0,0,0,.4);
       display: none; align-items: center; justify-content: center; z-index: 100;
@@ -136,41 +124,17 @@
     }
     .modal h3 { margin: 0 0 10px; }
     .modal .composition { white-space: pre-line; color: #333; margin-bottom: 16px; }
-    .modal .close-btn {
-      background: #2ec4b6; color: #fff; border: none;
-      border-radius: 8px; padding: 8px 16px; cursor: pointer;
-    }
+    .modal .close-btn { background: #2ec4b6; color: #fff; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; }
 
     /* ========================================= */
-    /* МОБИЛЬНАЯ ВЕРСИЯ (ДЛЯ ТЕЛЕФОНОВ)          */
+    /* МОБИЛЬНАЯ ВЕРСИЯ                          */
     /* ========================================= */
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-        height: auto;
-        overflow-y: auto;
-      }
-      .menu {
-        width: 100%;
-        height: 45vh;
-        border-right: none;
-        border-bottom: 2px solid #ccc;
-      }
-      .order {
-        padding: 12px;
-      }
-      .dish-btn {
-        padding: 14px; /* Удобнее нажимать пальцем */
-      }
-      .close-order {
-        width: 100%;
-        text-align: center;
-        padding: 15px;
-        font-size: 18px;
-      }
-      .comment-block {
-        max-width: 100%;
-      }
+      body { flex-direction: column; height: auto; overflow-y: auto; }
+      .menu { width: 100%; height: auto; max-height: 50vh; border-right: none; border-bottom: 2px solid #ccc; }
+      .order { padding: 12px; width: 100%; }
+      .close-order { width: 100%; text-align: center; padding: 15px; font-size: 18px; }
+      .comment-block { max-width: 100%; }
     }
   </style>
 </head>
@@ -204,14 +168,13 @@
         <div class="cat-body {% if q %}open{% endif %}">
           {% for dish in cat.dishes.all %}
             <div class="dish-row">
+              <!-- ТЕПЕРЬ ЭТО ССЫЛКА (A) ВМЕСТО ФОРМЫ -->
               {% if current_order %}
-                <form method="post" action="{% url 'add_dish' current_order.pk dish.pk %}" style="flex:1; display:flex;">
-                  {% csrf_token %}
-                  <button class="dish-btn" type="submit">{{ dish.name }}</button>
-                </form>
+                <a class="dish-btn" href="{% url 'add_dish' current_order.pk dish.pk %}">{{ dish.name }}</a>
               {% else %}
-                <button class="dish-btn" disabled>{{ dish.name }}</button>
+                <span class="dish-btn" style="opacity: 0.5;">{{ dish.name }}</span>
               {% endif %}
+
               <button class="info-btn"
                       type="button"
                       data-url="{% url 'dish_info' dish.pk %}"
@@ -251,20 +214,15 @@
           </div>
         {% endfor %}
 
-        <!-- БЛОК С КОММЕНТАРИЕМ И КНОПКОЙ ЗАКРЫТИЯ -->
         <form method="post" action="{% url 'close_order' current_order.pk %}">
           {% csrf_token %}
-
           <div class="comment-block">
             <label for="orderComment">Комментарий к заказу:</label>
             <textarea id="orderComment" name="comment" rows="2" placeholder="Например: кофе с корицей...">{{ current_order.comment|default:'' }}</textarea>
-
             <button type="submit" formaction="{% url 'update_comment' current_order.pk %}" class="btn-save-comment">Сохранить комментарий</button>
           </div>
-
           <button class="close-order" type="submit">Закрыть заказ</button>
         </form>
-
       {% else %}
         <p class="empty">Заказ пуст — выбери блюдо из меню.</p>
       {% endif %}
@@ -274,7 +232,7 @@
   {% endif %}
 </div>
 
-<!-- ================== МОДАЛКА СОСТАВА ================== -->
+<!-- ================== МОДАЛКА ================== -->
 <div class="modal-back" id="dish-modal">
   <div class="modal">
     <h3 id="dish-modal-title"></h3>
